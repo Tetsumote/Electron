@@ -1,6 +1,7 @@
 const {app, BrowserWindow,Menu} = require('electron')
   const path = require('path')
   const url = require('url')
+  const shell = require('electron').shell
   
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the JavaScript object is garbage collected.
@@ -33,7 +34,13 @@ const {app, BrowserWindow,Menu} = require('electron')
             label:'Menu',
             submenu:[
                 {label: 'Adjust Notification Value'},
-                {label: 'CoinMarketCap'},
+                {
+                    label: 'CoinMarketCap',
+                    click(){
+                        shell.openExternal('http://coinmarketcap.com')
+                    }
+                },
+                {type:'separator'},
                 {
                     label: 'Exit',
                     click(){
@@ -41,6 +48,9 @@ const {app, BrowserWindow,Menu} = require('electron')
                     }
                 }
             ]
+        },
+        {
+            label:'info'
         }
     ])
 
