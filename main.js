@@ -2,6 +2,7 @@ const {app, BrowserWindow,Menu} = require('electron')
   const path = require('path')
   const url = require('url')
   const shell = require('electron').shell
+  const ipc = require('electron').ipcMain
   
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the JavaScript object is garbage collected.
@@ -81,3 +82,7 @@ Menu.setApplicationMenu(menu);
   
   // In this file you can include the rest of your app's specific main process
   // code. You can also put them in separate files and require them here.
+
+  ipc.on('update-notify-value',function(event,arg){
+      win.webContents.send('targetPriceVal',arg)
+  })
